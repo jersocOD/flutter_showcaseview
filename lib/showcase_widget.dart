@@ -25,6 +25,7 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:showcaseview/showcase.dart';
 
 class ShowCaseWidget extends StatefulWidget {
   final Builder builder;
@@ -40,7 +41,7 @@ class ShowCaseWidget extends StatefulWidget {
 
   static ShowCaseWidgetState of(BuildContext context) {
     ShowCaseWidgetState state =
-    context.findAncestorStateOfType<ShowCaseWidgetState>();
+        context.findAncestorStateOfType<ShowCaseWidgetState>();
     if (state != null) {
       return context.findAncestorStateOfType<ShowCaseWidgetState>();
     } else {
@@ -92,14 +93,41 @@ class ShowCaseWidgetState extends State<ShowCaseWidget> {
   @override
   Widget build(BuildContext context) {
     return _InheritedShowCaseView(
-      child: widget.builder,
+      child: _Coordinator(child: widget.builder),
       activeWidgetIds: ids?.elementAt(activeWidgetId),
     );
   }
 }
 
+class _Coordinator extends StatefulWidget {
+  final Widget child;
+
+  const _Coordinator({Key key, this.child}) : super(key: key);
+
+  @override
+  __CoordinatorState createState() => __CoordinatorState();
+}
+
+class __CoordinatorState extends State<_Coordinator> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final state = context.findAncestorStateOfType<ShowCaseWidgetState>();
+    context
+        .dependOnInheritedWidgetOfExactType<_InheritedShowCaseView>()
+        .activeWidgetIds
+        .currentState
+        .showOverlay(state);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return widget.child;
+  }
+}
+
 class _InheritedShowCaseView extends InheritedWidget {
-  final GlobalKey activeWidgetIds;
+  final GlobalKey<ShowcaseState> activeWidgetIds;
 
   _InheritedShowCaseView({
     @required this.activeWidgetIds,

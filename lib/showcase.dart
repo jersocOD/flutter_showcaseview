@@ -101,7 +101,8 @@ class Showcase extends StatefulWidget {
             showcaseBackgroundColor != null ||
             textColor != null ||
             shapeBorder != null ||
-            animationDuration != null);
+            animationDuration != null),
+        super(key: key);
 
   const Showcase.withWidget({this.key,
     @required this.child,
@@ -137,14 +138,17 @@ class Showcase extends StatefulWidget {
             showcaseBackgroundColor != null ||
             textColor != null ||
             shapeBorder != null ||
-            animationDuration != null);
+            animationDuration != null),
+        super(key: key);
 
   @override
-  _ShowcaseState createState() => _ShowcaseState();
+  ShowcaseState createState() => ShowcaseState();
 }
 
-class _ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
+class ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
   bool _showShowCase = false;
+  ShowCaseWidgetState _showcaseState;
+
   Animation<double> _slideAnimation;
   AnimationController _slideAnimationController;
 
@@ -182,25 +186,17 @@ class _ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    showOverlay();
-  }
-
   ///
   /// show overlay if there is any target widget
-  ///
-  void showOverlay() {
-    GlobalKey activeStep = ShowCaseWidget.activeTargetWidget(context);
+  /// called by ShowcaseWidget's Coordinator when active key is this widget's key
+  void showOverlay(ShowCaseWidgetState state) {
     setState(() {
-      _showShowCase = activeStep == widget.key;
+      _showcaseState = state;
+      _showShowCase = true;
     });
 
-    if (activeStep == widget.key) {
-      if (!widget.disableAnimation) {
-        _slideAnimationController.forward();
-      }
+    if (!widget.disableAnimation) {
+      _slideAnimationController.forward();
     }
   }
 
@@ -216,7 +212,7 @@ class _ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
   }
 
   _nextIfAny() {
-    ShowCaseWidget.of(context).completed(widget.key);
+    _showcaseState.completed(widget.key);
     if (!widget.disableAnimation) {
       _slideAnimationController.forward();
     }
@@ -226,10 +222,10 @@ class _ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
     if (widget.disposeOnTap == true) {
       return widget.onTargetClick == null
           ? () {
-        ShowCaseWidget.of(context).dismiss();
+        _showcaseState.dismiss();
       }
           : () {
-        ShowCaseWidget.of(context).dismiss();
+        _showcaseState.dismiss();
         widget.onTargetClick();
       };
     } else {
@@ -241,10 +237,10 @@ class _ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
     if (widget.disposeOnTap == true) {
       return widget.onToolTipClick == null
           ? () {
-        ShowCaseWidget.of(context).dismiss();
+        _showcaseState.dismiss();
       }
           : () {
-        ShowCaseWidget.of(context).dismiss();
+        _showcaseState.dismiss();
         widget.onToolTipClick();
       };
     } else {
