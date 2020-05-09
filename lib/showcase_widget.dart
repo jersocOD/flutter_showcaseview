@@ -113,11 +113,12 @@ class __CoordinatorState extends State<_Coordinator> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final state = context.findAncestorStateOfType<ShowCaseWidgetState>();
-    context
-        .dependOnInheritedWidgetOfExactType<_InheritedShowCaseView>()
-        .activeWidgetIds
-        ?.currentState
-        ?.showOverlay(state);
+    final showcaseState = context
+            .dependOnInheritedWidgetOfExactType<_InheritedShowCaseView>()
+            .activeWidgetIds
+            ?.currentState;
+    if (showcaseState != null)
+      (showcaseState as ShowcaseState).showOverlay(state);
   }
 
   @override
@@ -127,7 +128,7 @@ class __CoordinatorState extends State<_Coordinator> {
 }
 
 class _InheritedShowCaseView extends InheritedWidget {
-  final GlobalKey<ShowcaseState> activeWidgetIds;
+  final GlobalKey activeWidgetIds;
 
   _InheritedShowCaseView({
     @required this.activeWidgetIds,
