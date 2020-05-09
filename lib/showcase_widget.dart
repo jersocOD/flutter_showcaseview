@@ -116,8 +116,8 @@ class __CoordinatorState extends State<_Coordinator> {
     context
         .dependOnInheritedWidgetOfExactType<_InheritedShowCaseView>()
         .activeWidgetIds
-        .currentState
-        .showOverlay(state);
+        ?.currentState
+        ?.showOverlay(state);
   }
 
   @override
