@@ -55,7 +55,7 @@ class Showcase extends StatefulWidget {
   final bool disposeOnTap;
   final bool disableAnimation;
   final EdgeInsetsGeometry spotlightPadding;
-  final VoidCallback onPassingNext;
+  final Function onPassingNext;
   const Showcase(
       {@required this.key,
       @required this.child,
@@ -219,9 +219,9 @@ class _ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
     );
   }
 
-  _nextIfAny() {
+  _nextIfAny() async {
     if (widget.onPassingNext != null) {
-      widget.onPassingNext();
+      await widget.onPassingNext();
     }
     ShowCaseWidget.of(context).completed(widget.key);
     if (!widget.disableAnimation) {
