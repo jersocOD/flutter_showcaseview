@@ -192,7 +192,7 @@ class ToolTipWidget extends StatelessWidget {
                         child: Container(
                           width: _getTooltipWidth(),
                           padding: EdgeInsets.all(8.0),
-                          color: tooltipColor,
+                          color: Colors.green ?? tooltipColor,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
@@ -222,26 +222,29 @@ class ToolTipWidget extends StatelessWidget {
                                               .merge(
                                                   TextStyle(color: textColor)),
                                     ),
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: GestureDetector(
-                                            child: Text("Cancel"),
-                                            onTap: () {
-                                              ShowCaseWidget.of(context)
-                                                  .cancelShowCase();
-                                            },
+                                    SizedBox(
+                                      height: 50,
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: GestureDetector(
+                                              child: Text("Cancel"),
+                                              onTap: () {
+                                                ShowCaseWidget.of(context)
+                                                    .cancelShowCase();
+                                              },
+                                            ),
                                           ),
-                                        ),
-                                        Expanded(
-                                          child: GestureDetector(
-                                            child: Text("Next"),
-                                            onTap: () {
-                                              nextIfAny();
-                                            },
-                                          ),
-                                        )
-                                      ],
+                                          Expanded(
+                                            child: GestureDetector(
+                                              child: Text("Next"),
+                                              onTap: () {
+                                                nextIfAny();
+                                              },
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     )
                                   ],
                                 ),
