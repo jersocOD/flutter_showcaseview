@@ -300,6 +300,7 @@ class _ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
             ToolTipWidget(
               position: position,
               offset: offset,
+              cancel: ShowCaseWidget.of(context).cancelShowCase,
               nextIfAny: nextIfAny,
               screenSize: screenSize,
               title: widget.title,

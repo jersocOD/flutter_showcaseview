@@ -49,6 +49,7 @@ class ToolTipWidget extends StatelessWidget {
   static bool isArrowUp;
   final VoidCallback onTooltipTap;
   final Function nextIfAny;
+  final Function cancel;
   final String cancelLabel;
   final String nextLabel;
   ToolTipWidget({
@@ -70,6 +71,7 @@ class ToolTipWidget extends StatelessWidget {
     this.nextIfAny,
     this.cancelLabel,
     this.nextLabel,
+    this.cancel,
   });
 
   bool isCloseToTopOrBottom(Offset position) {
@@ -197,7 +199,7 @@ class ToolTipWidget extends StatelessWidget {
                         child: Container(
                           width: _getTooltipWidth(),
                           padding: EdgeInsets.all(8.0),
-                          color: Colors.green ?? tooltipColor,
+                          color: tooltipColor,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
@@ -237,8 +239,9 @@ class ToolTipWidget extends StatelessWidget {
                                             child: ActionButton(
                                               text: cancelLabel ?? "Cancel",
                                               onPressed: () {
-                                                ShowCaseWidget.of(context)
-                                                    .cancelShowCase();
+                                                /*   ShowCaseWidget.of(context)
+                                                    .cancelShowCase(); */
+                                                cancel();
                                               },
                                             ),
                                           ),
