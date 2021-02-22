@@ -28,6 +28,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:showcaseview/get_position.dart';
+import 'package:showcaseview/showcase_widget.dart';
 
 class ToolTipWidget extends StatelessWidget {
   final GetPosition position;
@@ -46,7 +47,7 @@ class ToolTipWidget extends StatelessWidget {
   final double contentWidth;
   static bool isArrowUp;
   final VoidCallback onTooltipTap;
-
+  final Function nextIfAny;
   ToolTipWidget({
     this.position,
     this.offset,
@@ -63,6 +64,7 @@ class ToolTipWidget extends StatelessWidget {
     this.contentHeight,
     this.contentWidth,
     this.onTooltipTap,
+    this.nextIfAny,
   });
 
   bool isCloseToTopOrBottom(Offset position) {
@@ -182,7 +184,7 @@ class ToolTipWidget extends StatelessWidget {
                   color: Colors.transparent,
                   child: Container(
                     padding:
-                    EdgeInsets.only(top: paddingTop, bottom: paddingBottom),
+                        EdgeInsets.only(top: paddingTop, bottom: paddingBottom),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: GestureDetector(
@@ -202,14 +204,14 @@ class ToolTipWidget extends StatelessWidget {
                                   children: <Widget>[
                                     title != null
                                         ? Text(
-                                      title,
-                                      style: titleTextStyle ??
-                                          Theme.of(context)
-                                              .textTheme
-                                              .title
-                                              .merge(TextStyle(
-                                              color: textColor)),
-                                    )
+                                            title,
+                                            style: titleTextStyle ??
+                                                Theme.of(context)
+                                                    .textTheme
+                                                    .title
+                                                    .merge(TextStyle(
+                                                        color: textColor)),
+                                          )
                                         : Container(),
                                     Text(
                                       description,
@@ -217,8 +219,30 @@ class ToolTipWidget extends StatelessWidget {
                                           Theme.of(context)
                                               .textTheme
                                               .subtitle
-                                              .merge(TextStyle(color: textColor)),
+                                              .merge(
+                                                  TextStyle(color: textColor)),
                                     ),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: GestureDetector(
+                                            child: Text("Cancel"),
+                                            onTap: () {
+                                              ShowCaseWidget.of(context)
+                                                  .cancelShowCase();
+                                            },
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: GestureDetector(
+                                            child: Text("Next"),
+                                            onTap: () {
+                                              nextIfAny();
+                                            },
+                                          ),
+                                        )
+                                      ],
+                                    )
                                   ],
                                 ),
                               )
@@ -284,15 +308,15 @@ class ToolTipWidget extends StatelessWidget {
           ).animate(animationOffset),
           child: isArrowUp
               ? Icon(
-            Icons.arrow_drop_up,
-            color: tooltipColor,
-            size: 50,
-          )
+                  Icons.arrow_drop_up,
+                  color: tooltipColor,
+                  size: 50,
+                )
               : Icon(
-            Icons.arrow_drop_down,
-            color: tooltipColor,
-            size: 50,
-          ),
+                  Icons.arrow_drop_down,
+                  color: tooltipColor,
+                  size: 50,
+                ),
         ),
       ),
     );

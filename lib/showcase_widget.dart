@@ -40,7 +40,7 @@ class ShowCaseWidget extends StatefulWidget {
 
   static ShowCaseWidgetState of(BuildContext context) {
     ShowCaseWidgetState state =
-    context.findAncestorStateOfType<ShowCaseWidgetState>();
+        context.findAncestorStateOfType<ShowCaseWidgetState>();
     if (state != null) {
       return context.findAncestorStateOfType<ShowCaseWidgetState>();
     } else {
@@ -76,6 +76,10 @@ class ShowCaseWidgetState extends State<ShowCaseWidget> {
         }
       });
     }
+  }
+
+  void cancelShowCase() {
+    completed(ids.last);
   }
 
   void dismiss() {

@@ -219,7 +219,7 @@ class _ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
     );
   }
 
-  _nextIfAny() async {
+  nextIfAny() async {
     if (widget.onPassingNext != null) {
       await widget.onPassingNext();
     }
@@ -240,7 +240,7 @@ class _ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
               widget.onTargetClick();
             };
     } else {
-      return widget.onTargetClick ?? _nextIfAny;
+      return widget.onTargetClick ?? nextIfAny;
     }
   }
 
@@ -272,7 +272,7 @@ class _ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
         child: Stack(
           children: [
             GestureDetector(
-              onTap: _nextIfAny,
+              onTap: nextIfAny,
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
@@ -294,6 +294,7 @@ class _ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
             ToolTipWidget(
               position: position,
               offset: offset,
+              nextIfAny: nextIfAny,
               screenSize: screenSize,
               title: widget.title,
               description: widget.description,
