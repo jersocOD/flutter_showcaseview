@@ -58,7 +58,7 @@ class Showcase extends StatefulWidget {
   final Function onPassingNext;
   final String cancelLabel;
   final String nextLabel;
-
+  final bool withActionButtons;
   final BuildContext showcaseContext;
   const Showcase(
       {@required this.key,
@@ -81,7 +81,8 @@ class Showcase extends StatefulWidget {
       this.onPassingNext,
       this.cancelLabel,
       this.nextLabel,
-      this.showcaseContext})
+      this.showcaseContext,
+      this.withActionButtons = true})
       : height = null,
         width = null,
         container = null,
@@ -136,6 +137,7 @@ class Showcase extends StatefulWidget {
     this.cancelLabel,
     this.nextLabel,
     this.showcaseContext,
+    this.withActionButtons,
   })  : this.showArrow = false,
         this.onToolTipClick = null,
         assert(overlayOpacity >= 0.0 && overlayOpacity <= 1.0,
@@ -320,6 +322,7 @@ class _ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
                 onTooltipTap: _getOnTooltipTap(),
                 cancelLabel: widget.cancelLabel,
                 nextLabel: widget.nextLabel,
+                withActionButtons: widget.withActionButtons,
                 cancel: () {
                   ShowCaseWidget.of(widget.showcaseContext).cancelShowCase();
                 }),

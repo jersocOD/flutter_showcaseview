@@ -52,6 +52,7 @@ class ToolTipWidget extends StatelessWidget {
   final Function cancel;
   final String cancelLabel;
   final String nextLabel;
+  final bool withActionButtons;
   ToolTipWidget({
     this.position,
     this.offset,
@@ -72,6 +73,7 @@ class ToolTipWidget extends StatelessWidget {
     this.cancelLabel,
     this.nextLabel,
     this.cancel,
+    this.withActionButtons,
   });
 
   bool isCloseToTopOrBottom(Offset position) {
@@ -229,33 +231,36 @@ class ToolTipWidget extends StatelessWidget {
                                               .merge(
                                                   TextStyle(color: textColor)),
                                     ),
-                                    SizedBox(
-                                      height: 50,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Expanded(
-                                            child: ActionButton(
-                                              text: cancelLabel ?? "Cancel",
-                                              onPressed: () {
-                                                /*   ShowCaseWidget.of(context)
+                                    (this.withActionButtons)
+                                        ? SizedBox(
+                                            height: 50,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Expanded(
+                                                  child: ActionButton(
+                                                    text:
+                                                        cancelLabel ?? "Cancel",
+                                                    onPressed: () {
+                                                      /*   ShowCaseWidget.of(context)
                                                     .cancelShowCase(); */
-                                                cancel();
-                                              },
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: ActionButton(
-                                              text: nextLabel ?? "Next",
-                                              onPressed: () {
-                                                nextIfAny();
-                                              },
+                                                      cancel();
+                                                    },
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: ActionButton(
+                                                    text: nextLabel ?? "Next",
+                                                    onPressed: () {
+                                                      nextIfAny();
+                                                    },
+                                                  ),
+                                                )
+                                              ],
                                             ),
                                           )
-                                        ],
-                                      ),
-                                    )
+                                        : Container(),
                                   ],
                                 ),
                               )
