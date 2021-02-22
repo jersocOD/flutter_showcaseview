@@ -78,11 +78,12 @@ class ToolTipWidget extends StatelessWidget {
 
   bool isCloseToTopOrBottom(Offset position) {
     double height = screenSize.height / 2 /* 120 */;
-   
+
     if (contentHeight != null) {
       height = contentHeight;
     }
-     print("Content Height:$contentHeight, screenSize.height:${screenSize.height}")
+    print(
+        "Content Height:$contentHeight, screenSize.height:${screenSize.height}");
     return (screenSize.height - position.dy) <= height;
   }
 
