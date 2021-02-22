@@ -58,6 +58,8 @@ class Showcase extends StatefulWidget {
   final Function onPassingNext;
   final String cancelLabel;
   final String nextLabel;
+
+  final BuildContext showcaseContext;
   const Showcase(
       {@required this.key,
       @required this.child,
@@ -78,7 +80,8 @@ class Showcase extends StatefulWidget {
       this.spotlightPadding = const EdgeInsets.all(0.0),
       this.onPassingNext,
       this.cancelLabel,
-      this.nextLabel})
+      this.nextLabel,
+      this.showcaseContext})
       : height = null,
         width = null,
         container = null,
@@ -132,6 +135,7 @@ class Showcase extends StatefulWidget {
     this.onPassingNext,
     this.cancelLabel,
     this.nextLabel,
+    this.showcaseContext,
   })  : this.showArrow = false,
         this.onToolTipClick = null,
         assert(overlayOpacity >= 0.0 && overlayOpacity <= 1.0,
@@ -298,26 +302,27 @@ class _ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
               shapeBorder: widget.shapeBorder,
             ),
             ToolTipWidget(
-              position: position,
-              offset: offset,
-              cancel: ShowCaseWidget.of(context).cancelShowCase,
-              nextIfAny: nextIfAny,
-              screenSize: screenSize,
-              title: widget.title,
-              description: widget.description,
-              animationOffset: _slideAnimation,
-              titleTextStyle: widget.titleTextStyle,
-              descTextStyle: widget.descTextStyle,
-              container: widget.container,
-              tooltipColor: widget.showcaseBackgroundColor,
-              textColor: widget.textColor,
-              showArrow: widget.showArrow,
-              contentHeight: widget.height,
-              contentWidth: widget.width,
-              onTooltipTap: _getOnTooltipTap(),
-              cancelLabel: widget.cancelLabel,
-              nextLabel: widget.nextLabel,
-            ),
+                position: position,
+                offset: offset,
+                nextIfAny: nextIfAny,
+                screenSize: screenSize,
+                title: widget.title,
+                description: widget.description,
+                animationOffset: _slideAnimation,
+                titleTextStyle: widget.titleTextStyle,
+                descTextStyle: widget.descTextStyle,
+                container: widget.container,
+                tooltipColor: widget.showcaseBackgroundColor,
+                textColor: widget.textColor,
+                showArrow: widget.showArrow,
+                contentHeight: widget.height,
+                contentWidth: widget.width,
+                onTooltipTap: _getOnTooltipTap(),
+                cancelLabel: widget.cancelLabel,
+                nextLabel: widget.nextLabel,
+                cancel: () {
+                  ShowCaseWidget.of(widget.showcaseContext).cancelShowCase();
+                }),
           ],
         ),
       );
