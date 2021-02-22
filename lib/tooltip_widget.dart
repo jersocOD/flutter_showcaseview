@@ -225,6 +225,8 @@ class ToolTipWidget extends StatelessWidget {
                                     SizedBox(
                                       height: 50,
                                       child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         children: [
                                           Expanded(
                                             child: GestureDetector(
