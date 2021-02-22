@@ -77,7 +77,7 @@ class ToolTipWidget extends StatelessWidget {
   });
 
   bool isCloseToTopOrBottom(Offset position) {
-    double height = 120;
+    double height = screenSize.height / 2 /* 120 */;
     if (contentHeight != null) {
       height = contentHeight;
     }
