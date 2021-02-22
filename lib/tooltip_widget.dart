@@ -27,6 +27,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:showcaseview/action_button.dart';
 import 'package:showcaseview/get_position.dart';
 import 'package:showcaseview/showcase_widget.dart';
 
@@ -48,6 +49,8 @@ class ToolTipWidget extends StatelessWidget {
   static bool isArrowUp;
   final VoidCallback onTooltipTap;
   final Function nextIfAny;
+  final String cancelLabel;
+  final String nextLabel;
   ToolTipWidget({
     this.position,
     this.offset,
@@ -65,6 +68,8 @@ class ToolTipWidget extends StatelessWidget {
     this.contentWidth,
     this.onTooltipTap,
     this.nextIfAny,
+    this.cancelLabel,
+    this.nextLabel,
   });
 
   bool isCloseToTopOrBottom(Offset position) {
@@ -229,18 +234,18 @@ class ToolTipWidget extends StatelessWidget {
                                             MainAxisAlignment.start,
                                         children: [
                                           Expanded(
-                                            child: GestureDetector(
-                                              child: Text("Cancel"),
-                                              onTap: () {
+                                            child: ActionButton(
+                                              text: cancelLabel ?? "Cancel",
+                                              onPressed: () {
                                                 ShowCaseWidget.of(context)
                                                     .cancelShowCase();
                                               },
                                             ),
                                           ),
                                           Expanded(
-                                            child: GestureDetector(
-                                              child: Text("Next"),
-                                              onTap: () {
+                                            child: ActionButton(
+                                              text: nextLabel ?? "Next",
+                                              onPressed: () {
                                                 nextIfAny();
                                               },
                                             ),
