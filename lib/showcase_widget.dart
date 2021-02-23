@@ -33,9 +33,12 @@ class ShowCaseWidget extends StatefulWidget {
   const ShowCaseWidget({@required this.builder, this.onFinish});
 
   static activeTargetWidget(BuildContext context) {
-    return context
-        .dependOnInheritedWidgetOfExactType<_InheritedShowCaseView>()
-        .activeWidgetIds;
+    var value =
+        context.dependOnInheritedWidgetOfExactType<_InheritedShowCaseView>();
+    if (value != null) {
+      return value.activeWidgetIds;
+    }
+    return null;
   }
 
   static ShowCaseWidgetState of(BuildContext context) {
