@@ -213,7 +213,7 @@ class _ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
       _showShowCase = activeStep == widget.key;
     });
 
-    if (activeStep == widget.key) {
+    if (activeStep == widget.key || activeStep == null) {
       if (!widget.disableAnimation) {
         _slideAnimationController.forward();
       }

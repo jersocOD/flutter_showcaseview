@@ -83,7 +83,7 @@ class ShowCaseWidgetState extends State<ShowCaseWidget> {
 
   void cancelShowCase() {
     activeWidgetId = ids.length - 1;
-    print("Cancelling");
+    // print("Cancelling");
     completed(ids.last);
   }
 
