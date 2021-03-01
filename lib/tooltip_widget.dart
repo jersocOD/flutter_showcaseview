@@ -236,7 +236,7 @@ class ToolTipWidget extends StatelessWidget {
                                     ),
                                     (this.withActionButtons)
                                         ? SizedBox(
-                                            height: 50,
+                                            height: 30,
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,

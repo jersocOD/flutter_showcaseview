@@ -12,6 +12,7 @@ class ActionButton extends StatelessWidget {
         ? FlatButton(
             child: Text(
               text,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 color: Theme.of(context).textTheme.headline3.color,
               ),
@@ -19,7 +20,9 @@ class ActionButton extends StatelessWidget {
             onPressed: onPressed,
           )
         : CupertinoButton(
-            child: Text(text, style: TextStyle(fontWeight: FontWeight.bold)),
+            child: Text(text,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontWeight: FontWeight.bold)),
             onPressed: onPressed,
           );
   }
