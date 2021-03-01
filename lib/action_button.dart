@@ -5,7 +5,9 @@ import 'package:flutter/cupertino.dart';
 class ActionButton extends StatelessWidget {
   final String text;
   final Function onPressed;
-  const ActionButton({Key key, this.text, this.onPressed}) : super(key: key);
+  final Color textColor;
+  const ActionButton({Key key, this.text, this.onPressed, this.textColor})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Platform.isAndroid
@@ -15,7 +17,8 @@ class ActionButton extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
 //color: Theme.of(context).textTheme.headline3.color,
-                color: Theme.of(context).brightness != Brightness.light
+                color: textColor ??
+                        Theme.of(context).brightness != Brightness.light
                     ? Theme.of(context).primaryColor
                     : Theme.of(context).textTheme.headline3.color,
               ),
@@ -25,7 +28,8 @@ class ActionButton extends StatelessWidget {
         : CupertinoButton(
             child: Text(text,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontWeight: FontWeight.bold)),
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: textColor)),
             onPressed: onPressed,
           );
   }

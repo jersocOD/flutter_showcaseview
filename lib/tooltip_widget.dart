@@ -53,6 +53,7 @@ class ToolTipWidget extends StatelessWidget {
   final String cancelLabel;
   final String nextLabel;
   final bool withActionButtons;
+  final Color actionButtonsColor;
   ToolTipWidget({
     this.position,
     this.offset,
@@ -74,6 +75,7 @@ class ToolTipWidget extends StatelessWidget {
     this.nextLabel,
     this.cancel,
     this.withActionButtons,
+    this.actionButtonsColor,
   });
 
   bool isCloseToTopOrBottom(Offset position) {
@@ -236,13 +238,15 @@ class ToolTipWidget extends StatelessWidget {
                                     ),
                                     (this.withActionButtons)
                                         ? SizedBox(
-                                            height: 30,
+                                            height: 45,
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,
                                               children: [
                                                 Expanded(
                                                   child: ActionButton(
+                                                    textColor:
+                                                        actionButtonsColor,
                                                     text:
                                                         cancelLabel ?? "Cancel",
                                                     onPressed: () {
@@ -254,6 +258,8 @@ class ToolTipWidget extends StatelessWidget {
                                                 ),
                                                 Expanded(
                                                   child: ActionButton(
+                                                    textColor:
+                                                        actionButtonsColor,
                                                     text: nextLabel ?? "Next",
                                                     onPressed: () {
                                                       nextIfAny();

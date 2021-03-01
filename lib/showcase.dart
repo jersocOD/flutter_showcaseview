@@ -60,6 +60,7 @@ class Showcase extends StatefulWidget {
   final String nextLabel;
   final bool withActionButtons;
   final BuildContext showcaseContext;
+  final Color actionButtonsColor;
   const Showcase(
       {@required this.key,
       @required this.child,
@@ -82,7 +83,8 @@ class Showcase extends StatefulWidget {
       this.cancelLabel,
       this.nextLabel,
       this.showcaseContext,
-      this.withActionButtons = true})
+      this.withActionButtons = true,
+      this.actionButtonsColor})
       : height = null,
         width = null,
         container = null,
@@ -323,6 +325,7 @@ class _ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
                 cancelLabel: widget.cancelLabel,
                 nextLabel: widget.nextLabel,
                 withActionButtons: widget.withActionButtons,
+                actionButtonsColor: widget.actionButtonsColor,
                 cancel: () {
                   ShowCaseWidget.of(widget.showcaseContext).cancelShowCase();
                 }),
