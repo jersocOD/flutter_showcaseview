@@ -140,6 +140,7 @@ class Showcase extends StatefulWidget {
     this.nextLabel,
     this.showcaseContext,
     this.withActionButtons,
+    this.actionButtonsColor,
   })  : this.showArrow = false,
         this.onToolTipClick = null,
         assert(overlayOpacity >= 0.0 && overlayOpacity <= 1.0,
