@@ -15,7 +15,10 @@ class ActionButton extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
 //color: Theme.of(context).textTheme.headline3.color,
-                  ),
+                color: Theme.of(context).brightness != Brightness.light
+                    ? Theme.of(context).primaryColor
+                    : Theme.of(context).textTheme.headline3.color,
+              ),
             ),
             onPressed: onPressed,
           )
