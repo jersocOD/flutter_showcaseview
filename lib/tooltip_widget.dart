@@ -29,7 +29,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:showcaseview/action_button.dart';
 import 'package:showcaseview/get_position.dart';
-import 'package:showcaseview/showcase_widget.dart';
 
 class ToolTipWidget extends StatelessWidget {
   final GetPosition position;
@@ -54,6 +53,7 @@ class ToolTipWidget extends StatelessWidget {
   final String nextLabel;
   final bool withActionButtons;
   final Color actionButtonsColor;
+  final double actionButtonsHeight;
   ToolTipWidget({
     this.position,
     this.offset,
@@ -76,6 +76,7 @@ class ToolTipWidget extends StatelessWidget {
     this.cancel,
     this.withActionButtons,
     this.actionButtonsColor,
+    this.actionButtonsHeight,
   });
 
   bool isCloseToTopOrBottom(Offset position) {
@@ -238,7 +239,7 @@ class ToolTipWidget extends StatelessWidget {
                                     ),
                                     (this.withActionButtons)
                                         ? SizedBox(
-                                            height: 45,
+                                            height: actionButtonsHeight ?? 50,
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,
